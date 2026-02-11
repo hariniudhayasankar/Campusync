@@ -1,0 +1,7 @@
+{
+  "name": "CampusSync - Institutional Event Management",
+  "description": "A centralized, compliance-ready event management platform for colleges featuring role-based dashboards for admins, organizers, and students.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
