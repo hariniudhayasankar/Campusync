@@ -78,7 +78,7 @@ const SuperAdminDashboard: React.FC<SuperAdminDashboardProps> = ({ onEnrollClick
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-500">
+    <div className="space-y-8 animate-in fade-in duration-500 bg-transparent">
       <div>
         <h1 className="text-3xl font-black text-[var(--text-primary)] mb-2">Super Admin Dashboard</h1>
         <p className="text-[var(--text-secondary)]">Manage registered institutions</p>

@@ -38,7 +38,7 @@ const EventList: React.FC<EventListProps> = ({ type }) => {
   });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 bg-transparent">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-2 capitalize font-display tracking-tight">{type} Events</h1>

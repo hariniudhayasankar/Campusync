@@ -42,7 +42,7 @@ const ParticipantProfile: React.FC = () => {
     : [];
 
   return (
-    <div className="max-w-3xl mx-auto py-8">
+    <div className="max-w-3xl mx-auto py-8 bg-transparent">
       <div className="bg-[var(--bg-card)] rounded-xl border border-[var(--border-base)] shadow-xl overflow-hidden">
         {/* Header */}
         <div className="p-8 border-b border-[var(--border-base)] bg-[var(--bg-section)]">

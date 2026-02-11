@@ -49,7 +49,7 @@ const ParticipantExplore: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-8 pb-12 bg-transparent">
       {/* Hero Section */}
       <div className="relative h-72 rounded-xl overflow-hidden bg-[var(--bg-section)] border border-[var(--border-base)] flex items-center justify-center text-center p-8 shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/10 via-[var(--accent-glow)]/10 to-[var(--accent-primary)]/10"></div>
@@ -150,13 +150,13 @@ const ParticipantExplore: React.FC = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1.5 bg-[#1F2937]/95 backdrop-blur-sm text-[#3B82F6] rounded-lg text-[10px] font-black uppercase tracking-widest shadow-xl border border-[#3B82F6]/30">
+                  <span className="px-3 py-1.5 bg-[var(--bg-card)]/95 backdrop-blur-sm text-[var(--accent-primary)] rounded-lg text-[10px] font-black uppercase tracking-widest shadow-xl border border-[var(--accent-primary)]/30">
                     {e.category}
                   </span>
                 </div>
                 <div className="absolute bottom-4 left-4 text-white">
                   <div className="flex items-center gap-1.5 text-xs font-bold mb-1 opacity-90">
-                    <MapPin size={12} className="text-[#06B6D4]" />
+                    <MapPin size={12} className="text-[var(--accent-glow)]" />
                     {e.district}
                   </div>
                   <h4 className="font-black text-sm truncate max-w-[200px]">{e.college}</h4>
@@ -164,30 +164,30 @@ const ParticipantExplore: React.FC = () => {
               </div>
 
               <div className="p-8 flex-1 flex flex-col">
-                <h3 className="text-2xl font-black text-[#F9FAFB] mb-2 group-hover:text-[#3B82F6] transition-colors leading-tight">{e.title}</h3>
-                <p className="text-[#CBD5E1] text-sm font-medium line-clamp-2 mb-8 leading-relaxed">{e.description}</p>
+                <h3 className="text-2xl font-black text-[var(--text-primary)] mb-2 group-hover:text-[var(--accent-primary)] transition-colors leading-tight">{e.title}</h3>
+                <p className="text-[var(--text-secondary)] text-sm font-medium line-clamp-2 mb-8 leading-relaxed">{e.description}</p>
 
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-black text-[#94A3B8] uppercase tracking-widest">Timing</span>
-                    <div className="flex items-center gap-2 text-xs font-bold text-[#F9FAFB]">
-                      <Calendar size={14} className="text-[#3B82F6]" />
+                    <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest">Timing</span>
+                    <div className="flex items-center gap-2 text-xs font-bold text-[var(--text-primary)]">
+                      <Calendar size={14} className="text-[var(--accent-primary)]" />
                       {e.date}
                     </div>
                   </div>
                   <div className="flex flex-col gap-1">
-                    <span className="text-[10px] font-black text-[#94A3B8] uppercase tracking-widest">Capacity</span>
-                    <div className="flex items-center gap-2 text-xs font-bold text-[#F9FAFB]">
-                      <Users size={14} className="text-[#10B981]" />
+                    <span className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-widest">Capacity</span>
+                    <div className="flex items-center gap-2 text-xs font-bold text-[var(--text-primary)]">
+                      <Users size={14} className="text-[var(--success)]" />
                       {e.currentRegistrations} / {e.capacity}
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-auto pt-6 border-t border-[#2D3748] flex items-center justify-between">
+                <div className="mt-auto pt-6 border-t border-[var(--border-base)] flex items-center justify-between">
                   <div className="flex -space-x-3">
                     {[1, 2, 3].map(i => (
-                      <div key={i} className="w-9 h-9 rounded-lg border-2 border-[#1F2937] bg-[#243044] flex items-center justify-center text-[10px] font-black text-[#3B82F6] overflow-hidden shadow-sm">
+                      <div key={i} className="w-9 h-9 rounded-lg border-2 border-[var(--bg-card)] bg-[var(--bg-card-elevated)] flex items-center justify-center text-[10px] font-black text-[var(--accent-primary)] overflow-hidden shadow-sm">
                         <img src={`https://i.pravatar.cc/100?img=${i + 10}`} className="w-full h-full object-cover" />
                       </div>
                     ))}
@@ -198,7 +198,7 @@ const ParticipantExplore: React.FC = () => {
                     disabled={registeredEvents.includes(e.id)}
                     className={`flex items-center gap-2 px-8 py-4 rounded-lg font-black text-xs uppercase tracking-widest transition-all ${registeredEvents.includes(e.id)
                       ? 'bg-[var(--bg-card-elevated)] text-[var(--success)] border border-[var(--success)]/30 cursor-default'
-                      : 'bg-[#3B82F6] text-white hover:bg-[#60A5FA] hover:shadow-[#3B82F6]/30 shadow-xl active:scale-95'
+                      : 'bg-[var(--accent-primary)] text-white hover:bg-[var(--accent-hover)] hover:shadow-[var(--accent-primary)]/30 shadow-xl active:scale-95'
                       }`}
                   >
                     {registeredEvents.includes(e.id) ? (

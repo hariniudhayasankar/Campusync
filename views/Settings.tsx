@@ -36,7 +36,7 @@ const Settings: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto py-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="max-w-4xl mx-auto py-8 animate-in fade-in slide-in-from-bottom-4 duration-500 bg-transparent">
       <div className="mb-12">
         <h2 className="text-3xl font-black text-[var(--text-primary)] tracking-tight mb-2">Institutional Settings</h2>
         <p className="text-[var(--text-secondary)] text-lg">Manage global configurations for CampusSync and compliance metadata.</p>

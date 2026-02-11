@@ -41,7 +41,7 @@ const AdminDashboard: React.FC = () => {
   const completedCount = events.filter(e => e.status === EventStatus.COMPLETED).length;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-transparent">
       <div className="flex justify-between items-start">
         <div>
           <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-2 font-display tracking-tight">Command Center</h1>

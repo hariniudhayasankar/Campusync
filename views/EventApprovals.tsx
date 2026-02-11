@@ -12,7 +12,7 @@ const EventApprovals: React.FC = () => {
   const selectedEvent = events.find(e => e.id === selectedEventId);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 bg-transparent">
       <div>
         <h1 className="text-3xl font-bold text-[var(--text-primary)] mb-2 font-display tracking-tight">Event Approvals</h1>
         <p className="text-sm text-[var(--text-secondary)] font-medium">Review and approve new event proposals</p>

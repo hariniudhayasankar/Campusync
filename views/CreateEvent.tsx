@@ -72,7 +72,7 @@ const CreateEvent: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-8">
+    <div className="max-w-4xl mx-auto py-8 bg-transparent">
       <div className="mb-12">
         <h2 className="text-2xl font-bold text-[var(--text-primary)] mb-2">Create Event Proposal</h2>
         <p className="text-[var(--text-secondary)]">Standardized workflow for event governance and compliance.</p>

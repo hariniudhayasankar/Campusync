@@ -191,7 +191,9 @@ const AppContent: React.FC = () => {
         {activeView !== 'enrollment' && <Header />}
         <main className={`flex-1 overflow-y-auto ${activeView === 'enrollment' ? 'p-8' : 'p-6'}`}>
           <div className={`max-w-7xl mx-auto ${activeView === 'enrollment' ? 'max-w-4xl' : ''}`}>
-            {renderView()}
+            <div className="bg-[var(--bg-section)] rounded-xl border border-[var(--border-base)] shadow-lg p-6 min-h-[calc(100vh-200px)]">
+              {renderView()}
+            </div>
           </div>
         </main>
       </div>
