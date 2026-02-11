@@ -1,27 +1,10 @@
 
+
 import React, { useState, useMemo } from 'react';
-import { Search, Filter, MapPin, Calendar, Users, ChevronRight, Check, School, Building2 } from 'lucide-react';
+import { Search, MapPin, Calendar, Users, ChevronRight, Check, School, Building2 } from 'lucide-react';
 import { useAppContext } from '../store';
 import { EventStatus } from '../types';
-
-// Tamil Nadu District Data with representative major colleges
-const TN_COLLEGES_BY_DISTRICT: Record<string, string[]> = {
-  'All Districts': [],
-  'Chennai': ['Anna University', 'IIT Madras', 'Loyola College', 'Madras Christian College', 'Ethiraj College', 'Sathyabama University'],
-  'Coimbatore': ['PSG College of Technology', 'Amrita Vishwa Vidyapeetham', 'Coimbatore Institute of Technology', 'Karunya Institute', 'Government College of Technology'],
-  'Madurai': ['Madurai Kamaraj University', 'Thiagarajar College of Engineering', 'American College', 'Fatima College'],
-  'Trichy': ['NIT Trichy', 'Bharathidasan University', 'St. Joseph\'s College', 'Sastra Deemed University (Tanjore/Trichy)'],
-  'Salem': ['Government College of Engineering', 'Sona College of Technology', 'Periyar University'],
-  'Vellore': ['VIT Vellore', 'Christian Medical College', 'Thiruvalluvar University'],
-  'Kanchipuram': ['SRM Institute of Science and Technology', 'Hindustan University', 'SCSVMV University'],
-  'Erode': ['Kongu Engineering College', 'Bannari Amman Institute of Technology'],
-  'Thanjavur': ['SASTRA University', 'Tamil University', 'Government College of Engineering'],
-  'Kanyakumari': ['St. Xavier\'s Catholic College of Engineering', 'Noorul Islam Centre for Higher Education'],
-  'Tirunelveli': ['Government College of Engineering', 'Manonmaniam Sundaranar University'],
-  'Dindigul': ['Gandhigram Rural Institute', 'PSNA College of Engineering'],
-  'Thiruvallur': ['Vel Tech University', 'St. Peter\'s Institute'],
-  'Tuticorin': ['V.O. Chidambaram College', 'Government Engineering College'],
-};
+import collegesData from '../data/colleges.json';
 
 const ParticipantExplore: React.FC = () => {
   const { events } = useAppContext();
@@ -31,19 +14,29 @@ const ParticipantExplore: React.FC = () => {
   const [selectedCollege, setSelectedCollege] = useState('All Colleges');
   const [registeredEvents, setRegisteredEvents] = useState<string[]>([]);
 
-  const districts = useMemo(() => Object.keys(TN_COLLEGES_BY_DISTRICT), []);
+  const districts = useMemo(() => ['All Districts', ...collegesData.districts], []);
+
   const collegesInDistrict = useMemo(() => {
     if (selectedDistrict === 'All Districts') return [];
-    return ['All Colleges', ...TN_COLLEGES_BY_DISTRICT[selectedDistrict]];
+
+    // Filter colleges by selected district
+    const colleges = collegesData.colleges
+      .filter(c => c.district === selectedDistrict)
+      .map(c => c.college_name);
+
+    // Sort alphabetically
+    colleges.sort();
+
+    return ['All Colleges', ...colleges];
   }, [selectedDistrict]);
 
   const filteredEvents = events.filter(e => {
-    const matchesSearch = e.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          e.college.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      e.college.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = categoryFilter === 'All' || e.category === categoryFilter;
     const matchesDistrict = selectedDistrict === 'All Districts' || e.district === selectedDistrict;
     const matchesCollege = selectedCollege === 'All Colleges' || e.college === selectedCollege;
-    
+
     return matchesSearch && matchesCategory && matchesDistrict && matchesCollege && e.status === EventStatus.APPROVED;
   });
 
@@ -59,8 +52,8 @@ const ParticipantExplore: React.FC = () => {
     <div className="space-y-8 pb-12">
       {/* Hero Section */}
       <div className="relative h-72 rounded-[40px] overflow-hidden bg-indigo-900 flex items-center justify-center text-center p-8 shadow-2xl">
-        <img 
-          src="https://images.unsplash.com/photo-1541339906194-e1620f94411b?auto=format&fit=crop&w=1200&q=80" 
+        <img
+          src="https://images.unsplash.com/photo-1541339906194-e1620f94411b?auto=format&fit=crop&w=1200&q=80"
           className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay"
           alt="Campus Background"
         />
@@ -76,8 +69,8 @@ const ParticipantExplore: React.FC = () => {
           {/* Search Bar */}
           <div className="flex-[2] relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-            <input 
-              type="text" 
+            <input
+              type="text"
               placeholder="Search events, workshops, or colleges..."
               className="w-full pl-12 pr-4 py-4 rounded-2xl border bg-gray-50 focus:bg-white focus:ring-4 focus:ring-indigo-100 outline-none transition-all font-medium"
               value={searchTerm}
@@ -123,11 +116,10 @@ const ParticipantExplore: React.FC = () => {
             <button
               key={cat}
               onClick={() => setCategoryFilter(cat)}
-              className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
-                categoryFilter === cat 
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200' 
+              className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all ${categoryFilter === cat
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200'
                   : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-              }`}
+                }`}
             >
               {cat}
             </button>
@@ -138,7 +130,7 @@ const ParticipantExplore: React.FC = () => {
       {/* Results Header */}
       <div className="flex justify-between items-center px-4">
         <h2 className="text-xl font-black text-gray-800 flex items-center gap-2">
-          {filteredEvents.length} Events Found 
+          {filteredEvents.length} Events Found
           {selectedDistrict !== 'All Districts' && <span className="text-indigo-600 px-2 py-0.5 bg-indigo-50 rounded text-sm font-bold">in {selectedDistrict}</span>}
         </h2>
       </div>
@@ -155,8 +147,8 @@ const ParticipantExplore: React.FC = () => {
           filteredEvents.map(e => (
             <div key={e.id} className="group bg-white rounded-[32px] border overflow-hidden hover:shadow-2xl transition-all duration-500 flex flex-col">
               <div className="h-56 overflow-hidden relative">
-                <img 
-                  src={`https://picsum.photos/seed/${e.id}/800/600`} 
+                <img
+                  src={`https://picsum.photos/seed/${e.id}/800/600`}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                   alt={e.title}
                 />
@@ -174,11 +166,11 @@ const ParticipantExplore: React.FC = () => {
                   <h4 className="font-black text-sm truncate max-w-[200px]">{e.college}</h4>
                 </div>
               </div>
-              
+
               <div className="p-8 flex-1 flex flex-col">
                 <h3 className="text-2xl font-black text-gray-900 mb-2 group-hover:text-indigo-600 transition-colors leading-tight">{e.title}</h3>
                 <p className="text-gray-500 text-sm font-medium line-clamp-2 mb-8 leading-relaxed">{e.description}</p>
-                
+
                 <div className="grid grid-cols-2 gap-4 mb-8">
                   <div className="flex flex-col gap-1">
                     <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Timing</span>
@@ -198,21 +190,20 @@ const ParticipantExplore: React.FC = () => {
 
                 <div className="mt-auto pt-6 border-t flex items-center justify-between">
                   <div className="flex -space-x-3">
-                    {[1,2,3].map(i => (
+                    {[1, 2, 3].map(i => (
                       <div key={i} className="w-9 h-9 rounded-2xl border-2 border-white bg-indigo-50 flex items-center justify-center text-[10px] font-black text-indigo-400 overflow-hidden shadow-sm">
                         <img src={`https://i.pravatar.cc/100?img=${i + 10}`} className="w-full h-full object-cover" />
                       </div>
                     ))}
                   </div>
 
-                  <button 
+                  <button
                     onClick={() => handleRegister(e.id)}
                     disabled={registeredEvents.includes(e.id)}
-                    className={`flex items-center gap-2 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${
-                      registeredEvents.includes(e.id) 
-                        ? 'bg-emerald-50 text-emerald-600 border border-emerald-100 cursor-default' 
+                    className={`flex items-center gap-2 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${registeredEvents.includes(e.id)
+                        ? 'bg-emerald-50 text-emerald-600 border border-emerald-100 cursor-default'
                         : 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-xl shadow-indigo-100 active:scale-95'
-                    }`}
+                      }`}
                   >
                     {registeredEvents.includes(e.id) ? (
                       <>
