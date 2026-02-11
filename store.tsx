@@ -9,6 +9,8 @@ interface AppContextType {
   setEvents: React.Dispatch<React.SetStateAction<EventProposal[]>>;
   updateEventStatus: (id: string, status: EventStatus, reason?: string) => void;
   addEvent: (event: Omit<EventProposal, 'id' | 'status' | 'createdAt' | 'currentRegistrations'>) => void;
+  theme: 'light' | 'dark';
+  setTheme: (theme: 'light' | 'dark') => void;
 }
 
 const initialEvents: EventProposal[] = [
@@ -191,6 +193,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [events, setEvents] = useState<EventProposal[]>(initialEvents);
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
   const updateEventStatus = (id: string, status: EventStatus, reason?: string) => {
     setEvents(prev => prev.map(e => e.id === id ? { ...e, status, rejectionReason: reason } : e));
@@ -208,7 +211,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   };
 
   return (
-    <AppContext.Provider value={{ currentUser, setCurrentUser, events, setEvents, updateEventStatus, addEvent }}>
+    <AppContext.Provider value={{ currentUser, setCurrentUser, events, setEvents, updateEventStatus, addEvent, theme, setTheme }}>
       {children}
     </AppContext.Provider>
   );

@@ -2,7 +2,8 @@
 export enum UserRole {
   ADMIN = 'ADMIN',
   ORGANIZER = 'ORGANIZER',
-  PARTICIPANT = 'PARTICIPANT'
+  PARTICIPANT = 'PARTICIPANT',
+  MANAGEMENT = 'MANAGEMENT'
 }
 
 export enum EventStatus {
@@ -47,6 +48,12 @@ export interface User {
   // Added college and district to match institutional context requirements
   college?: string;
   district?: string;
+  // Profile completion status
+  profileCompleted?: boolean;
+  // Additional participant fields
+  year?: string;
+  rollNumber?: string;
+  phone?: string;
 }
 
 export interface DashboardStats {

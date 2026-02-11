@@ -1,16 +1,198 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampuSync</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+            letter-spacing: -0.01em;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Space Grotesk', 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Midnight Command Center Design System */
+        :root {
+            /* Background Layers (Dark Navy Hierarchy) */
+            --bg-app: #0B1220;
+            /* Deep navy - app background */
+            --bg-section: #111827;
+            /* Section panels */
+            --bg-card: #1F2937;
+            /* Cards */
+            --bg-card-elevated: #243044;
+            /* Elevated cards */
+            --bg-sidebar: #0F172A;
+            /* Dark sidebar */
+            --bg-sidebar-hover: #1E293B;
+            /* Sidebar hover */
+
+            /* Borders */
+            --border-base: #2D3748;
+            /* Base borders */
+            --border-light: #374151;
+            /* Light borders */
+            --border-medium: #4B5563;
+            /* Medium borders */
+
+            /* Text Hierarchy */
+            --text-primary: #F9FAFB;
+            /* Primary text (white) */
+            --text-secondary: #CBD5E1;
+            /* Secondary text */
+            --text-muted: #94A3B8;
+            /* Muted text */
+
+            /* Accent Blues (20% usage - minimal) */
+            --accent-primary: #3B82F6;
+            /* Electric blue */
+            --accent-glow: #06B6D4;
+            /* Cyan glow */
+            --accent-hover: #60A5FA;
+            /* Light blue hover */
+            --accent-primary-hover: #2563EB;
+
+            /* Status Colors */
+            --success: #10B981;
+            /* Green */
+            --warning: #F59E0B;
+            /* Amber */
+            --danger: #EF4444;
+            /* Red */
+
+
+            /* Glass Effect Default */
+            --glass-bg: rgba(31, 41, 55, 0.8);
+            --glass-border: var(--border-base);
+
+            /* Shadows (Dark Theme) */
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+
+            /* shadcn/ui CSS Variables */
+            --background: #0B1220;
+            --foreground: #F9FAFB;
+            --card: #1F2937;
+            --card-foreground: #F9FAFB;
+            --popover: #1F2937;
+            --popover-foreground: #F9FAFB;
+            --primary: #3B82F6;
+            --primary-foreground: #FFFFFF;
+            --secondary: #111827;
+            --secondary-foreground: #F9FAFB;
+            --muted: #111827;
+            --muted-foreground: #94A3B8;
+            --accent: #243044;
+            --accent-foreground: #F9FAFB;
+            --destructive: #EF4444;
+            --destructive-foreground: #FFFFFF;
+            --border: #2D3748;
+            --input: #2D3748;
+            --ring: #3B82F6;
+            --radius: 0.5rem;
+        }
+
+        .light {
+            /* Background Layers (Clean Light Hierarchy) */
+            --bg-app: #F8FAFC;
+            --bg-section: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --bg-card-elevated: #F1F5F9;
+            --bg-sidebar: #FFFFFF;
+            --bg-sidebar-hover: #F8FAFC;
+            --bg-input: #FFFFFF;
+
+            /* Borders */
+            --border-base: #E2E8F0;
+            --border-light: #F1F5F9;
+            --border-medium: #CBD5E1;
+            --border-accent: rgba(59, 130, 246, 0.1);
+
+            /* Text Hierarchy */
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #64748B;
+
+            /* Accent Colors (same as dark for consistency) */
+            --accent-primary: #3B82F6;
+            --accent-glow: #06B6D4;
+            --accent-hover: #60A5FA;
+            --accent-primary-hover: #2563EB;
+
+            /* Status Colors */
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+
+            /* Glass Effect Light */
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: var(--border-base);
+
+            /* Shadows (Light Theme) */
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.1);
+
+            /* shadcn/ui CSS Variables (Light Mode) */
+            --background: #FFFFFF;
+            --foreground: #0F172A;
+            --card: #FFFFFF;
+            --card-foreground: #0F172A;
+            --popover: #FFFFFF;
+            --popover-foreground: #0F172A;
+            --primary: #3B82F6;
+            --primary-foreground: #FFFFFF;
+            --secondary: #F1F5F9;
+            --secondary-foreground: #0F172A;
+            --muted: #F1F5F9;
+            --muted-foreground: #64748B;
+            --accent: #F1F5F9;
+            --accent-foreground: #0F172A;
+            --destructive: #EF4444;
+            --destructive-foreground: #FFFFFF;
+            --border: #E2E8F0;
+            --input: #E2E8F0;
+            --ring: #3B82F6;
+        }
+
+        /* Frosted Glass Effect (Theme Aware) */
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        /* Glow Effect */
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .glow-effect-hover:hover {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+        }
     </style>
-<script type="importmap">
+    <script type="importmap">
 {
   "imports": {
     "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
@@ -22,8 +204,10 @@
 }
 </script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+
+<body class="bg-[var(--bg-app)] text-[var(--text-primary)] transition-colors duration-300">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>
+
 </html>

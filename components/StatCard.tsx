@@ -14,28 +14,29 @@ interface StatCardProps {
 
 const StatCard: React.FC<StatCardProps> = ({ label, value, icon, trend, color }) => {
   const colorMap = {
-    indigo: 'bg-indigo-50 text-indigo-600 border-indigo-100',
-    emerald: 'bg-emerald-50 text-emerald-600 border-emerald-100',
-    amber: 'bg-amber-50 text-amber-600 border-amber-100',
-    rose: 'bg-rose-50 text-rose-600 border-rose-100',
-    blue: 'bg-blue-50 text-blue-600 border-blue-100',
+    indigo: 'bg-[#243044] text-[#3B82F6] border-[#3B82F6]/20',
+    emerald: 'bg-[#1A2E1A] text-[#10B981] border-[#10B981]/20',
+    amber: 'bg-[#2E2419] text-[#F59E0B] border-[#F59E0B]/20',
+    rose: 'bg-[#2E1A1A] text-[#EF4444] border-[#EF4444]/20',
+    blue: 'bg-[#1E293B] text-[#60A5FA] border-[#60A5FA]/20',
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl border shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm font-medium text-gray-500 mb-1">{label}</p>
-          <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
-          {trend && (
-            <p className={`text-xs mt-2 flex items-center gap-1 ${trend.isUp ? 'text-emerald-600' : 'text-rose-600'}`}>
-              {trend.isUp ? '↑' : '↓'} {trend.value}% from last month
-            </p>
-          )}
-        </div>
-        <div className={`p-3 rounded-xl border ${colorMap[color]}`}>
+    <div className="bg-[#1F2937] p-5 border border-[#2D3748] rounded-xl shadow-md hover:shadow-lg hover:border-[#3B82F6]/30 transition-all hover:bg-[#243044]">
+      <div className="flex items-start justify-between mb-3">
+        <p className="text-xs font-medium text-[#94A3B8] uppercase tracking-wide">{label}</p>
+        <div className={`p-2 rounded-lg border ${colorMap[color]}`}>
           {icon}
         </div>
+      </div>
+      <div>
+        <h3 className="text-2xl font-semibold text-[#F9FAFB] mb-1">{value}</h3>
+        {trend && (
+          <p className={`text-xs flex items-center gap-1 ${trend.isUp ? 'text-[#10B981]' : 'text-[#EF4444]'}`}>
+            <span>{trend.isUp ? '↑' : '↓'}</span>
+            <span>{trend.value}% from last month</span>
+          </p>
+        )}
       </div>
     </div>
   );
